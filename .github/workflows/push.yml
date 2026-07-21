@@ -68,7 +68,7 @@ jobs:
       contents: read
       actions: read
       security-events: write # Required for SARIF upload to Code Scanning
-    uses: sandlbn/.github/.github/workflows/grype-scan.yml@93f9dcd2dcc15bb46325488d18f6e189589530d4
+    uses: sandlbn/.github/.github/workflows/grype-scan.yml@c9a7ba613ae3b53b8ebfb48e2d216b91f576e532
     with:
       changed: ${{ needs.tag-github.outputs.changed }}
       artifact_name: ${{ github.event.repository.name }}-${{ needs.tag-github.outputs.version }}.spdx.json
