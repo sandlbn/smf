@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    uses: sandlbn/.github/.github/workflows/sbom-source.yml@6c764b26875f4e07e189b27d1ff3adff59cc82f3
+    uses: sandlbn/.github/.github/workflows/sbom-source.yml@main
     with:
       changed: "true"
       branch_name: ${{ github.ref }}
@@ -27,7 +27,7 @@ jobs:
       contents: read
       actions: read
       security-events: write
-    uses: sandlbn/.github/.github/workflows/grype-scan.yml@6c764b26875f4e07e189b27d1ff3adff59cc82f3
+    uses: sandlbn/.github/.github/workflows/grype-scan.yml@main
     with:
       changed: "true"
       artifact_name: grype-sarif-smoke-${{ github.run_id }}.spdx.json
