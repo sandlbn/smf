@@ -68,7 +68,8 @@ jobs:
       contents: read
       actions: read
       security-events: write # Required for SARIF upload to Code Scanning
-    uses: omec-project/.github/.github/workflows/grype-scan.yml@7d95c1966f0335e8135b833e5a33f1bec71c17c7 # v0.0.29
+    uses: sandlbn/.github/.github/workflows/grype-scan.yml@e503df1a267ac39e1e34485fdf1993e280bdc36d
     with:
       changed: ${{ needs.tag-github.outputs.changed }}
       artifact_name: ${{ github.event.repository.name }}-${{ needs.tag-github.outputs.version }}.spdx.json
+      upload_sarif: true
