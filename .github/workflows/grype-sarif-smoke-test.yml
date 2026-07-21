@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: Apache-2.0
+# Temporary workflow to validate Grype SARIF upload in forks.
+name: Grype SARIF Smoke Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sbom-source:
+    permissions:
+      contents: read
+      actions: read
+    uses: sandlbn/.github/.github/workflows/sbom-source.yml@e503df1a267ac39e1e34485fdf1993e280bdc36d
+    with:
+      changed: "true"
+      branch_name: ${{ github.ref }}
+      artifact_name: grype-sarif-smoke-${{ github.run_id }}.spdx.json
+      sbom_format: spdx-json
+      path: .
+
+  grype-scan:
+    needs: sbom-source
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    uses: sandlbn/.github/.github/workflows/grype-scan.yml@e503df1a267ac39e1e34485fdf1993e280bdc36d
+    with:
+      changed: "true"
+      artifact_name: grype-sarif-smoke-${{ github.run_id }}.spdx.json
+      upload_sarif: true
+      output_format: sarif
+      fail_build: false
